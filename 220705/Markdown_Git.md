@@ -239,8 +239,6 @@ committed : 커밋 된 상태
   * git log --online 한줄로 짧게 보여줘
   * git log -2 --oneline 최근 2개를 한줄로 짧게 보여줘
 
-* git keep-
-
 * git remote add origin https://github.com/username/test.git
 
   ​      깃아 원격저장소 추가해줘 오리진이라는 이름으로 URL을
