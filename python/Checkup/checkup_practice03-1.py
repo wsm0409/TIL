@@ -8,7 +8,7 @@ result = 0
 user_input = int(input())
 
 while n < user_input :
-	    n += 1
-	    result += n
+		n += 1
+		result += n
 print(result)
 

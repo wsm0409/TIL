@@ -6,9 +6,10 @@
 
 numbers = [3, 10, 20]
 result = 0
-
+count = 0
 
 for idx in numbers:
     result += idx
-result /= 3
-print(result)
+    count += 1
+    
+print(result/count)
