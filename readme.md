@@ -29,5 +29,5 @@
 
 ### 🚩[220713](./220713/TIL0713.md) - Python (함수 ING)
 
-* [python 정리](./python 정리.md) - 개인적인 정리
+* [python_study](./python_study.md) - 개인적인 정리
 
