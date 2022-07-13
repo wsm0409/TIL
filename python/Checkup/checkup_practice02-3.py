@@ -4,13 +4,3 @@
 
 # input word = 'happy'
 
-numbers =[0,20,100,120] 
-max = 0
-max2 = 0
-for i in numbers:
-    if i > max:
-        max2 = max
-        max = i
-    elif max2 < i < max:
-        max2 = i
-print(max2)
