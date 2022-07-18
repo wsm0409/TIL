@@ -3,7 +3,7 @@
 
 number = int(input())
 a = number
-if 9 >= a >= 0:
+if 9 >= a > 0:
     print(1)
 elif 99 >= a > 9:
     print(2)
