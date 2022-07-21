@@ -16,13 +16,13 @@
 
 # 여기서 주의해야 할 것은 박수 한 번 칠 때는 - 이며, 박수를 두 번 칠 때는 - - 가 아닌 -- 이다. 
 
-N = int(input())
-B = ['3', '6', '9']
-for a in range(1, N+1):
-    c = 0
-    for i in str(a):
-        if i in B:
-            c += 1
-    if c > 0:
-        a = '-' * c
-    print(a, end=' ')
+N = int(input())         
+D = ['3', '6', '9']                       
+for i in range(1, N+1):   
+    count = 0            
+    for a in str(i):     
+        if a in D:
+            count += 1
+    if count > 0:
+        i = '-' * count
+    print(i, end=' ')

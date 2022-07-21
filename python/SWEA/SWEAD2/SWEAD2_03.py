@@ -16,7 +16,7 @@ for a in range(1, T+1):
     B = int(input())
     N = list(map(int, (input().split())))
     counter = {}
-    for i in sorted(N):
+    for i in N:
         try: counter[i] += 1
         except: counter[i] = 1 
     print(f'#{B}', max([x for x, v in counter.items() if max(counter.values()) == v]))

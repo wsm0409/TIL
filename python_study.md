@@ -260,3 +260,9 @@ for n in range(1, 10+1):
 >>>  [x for x in range(1, 10+1) if x % 2 == 0]
 [2, 4, 6, 8, 10]
 ```
+
+#### Dictionary Comprehension
+
+{key: value for <변수> in <iterable>}
+
+{key: value for <변수> in <iterable.> if <조건식>}
