@@ -266,3 +266,11 @@ for n in range(1, 10+1):
 {key: value for <변수> in <iterable>}
 
 {key: value for <변수> in <iterable.> if <조건식>}
+
+
+
+
+
+sorted()와 같은 함수는 가급적 반복문 밖에서 해야함
+
+* 시간이 많이 걸리는 작업이기때문에 반복문내에서 사용할 시 시간초과할 수도 있음
