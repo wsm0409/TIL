@@ -6,13 +6,12 @@
 
 # level, noon은 팰린드롬이고, baekjoon, online, judge는 팰린드롬이 아니다.
 
+word = list(input())
 
-word = input()
-li =[]
-li.append(list(str(word)))
-lir =reversed(str(li))
-print(lir)
-if word == lir:
+lir = word[::-1]
+if lir == word:
     print(1)
 else:
     print(0)
+
+
