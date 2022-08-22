@@ -130,38 +130,128 @@ SELECT  count(Country) AS '고객_수', Country AS '나라'
 
 ### 11. 앨범(albums) 테이블에서 가장 많은 앨범이 있는 Artist의 `ArtistId`와 `앨범 수`를 출력하세요.
 ```sql
+ SELECT artistId, count(*) AS "앨범_수"
+   ...> FROM albums
+   ...> GROUP BY artistId
+   ...> ORDER BY "앨범_수" DESC LIMIT 1;
+-----------------------------------------------
+ArtistId  앨범_수
+--------  ----
+90        21
 ```
 
 ### 12. 앨범(albums) 테이블에서 보유 앨범 수가 10개 이상인 Artist의 `ArtistId`와 `앨범 수` 출력하세요
 | 단, 앨범 수를 기준으로 내림차순으로 출력하세요.
+
 ```sql 
+SELECT artistId, count_2 AS "앨범_수"
+   ...> FROM(
+   ...> SELECT artistId, count(artistId) AS count_2
+   ...> FROM albums
+   ...> GROUP BY artistId
+   ...> )
+   ...> WHERE count_2 >= 10
+   ...> ORDER BY count_2 DESC;
+----------------------------------------------------
+artistId  앨범_수
+--------  ----
+90        21
+22        14
+58        11
+50        10
+150       10
 ```
 
 ### 13. 고객(customers) 테이블에서 `State`가 존재하는 고객들을 `Country` 와 `State`를 기준으로 그룹화해서 각 그룹의 `고객 수`, `Country`, `State` 를 출력하세요.
 | 단, `고객 수`, `Country` 순서 기준으로 내림차순으로 5개까지 출력하세요.
+
 ```sql 
+SELECT count(*) AS "고객_수", Country, state 
+   ...> FROM (SELECT state, Country FROM customers WHERE state NOT NULL) 
+   ...> GROUP BY state, Country 
+   ...> ORDER BY "고객_수" DESC, Country DESC LIMIT 5;
+---------------------------------------------------------------------------------
+고객_수  Country  state
+----  -------  -----
+3     USA      CA
+3     Brazil   SP
+2     Canada   ON
+1     USA      WI
+1     USA      WA
 ```
 
 ### 14.  고객(customers) 테이블에서 `Fax` 가 `NULL`인 고객은 'X' NULL이 아닌 고객은 'O'로 `Fax 유/무` 컬럼에 표시하여 출력하세요.
 | 단, `CustomerId`와 `Fax 유/무` 컬럼만 출력하고, `CustomerId` 기준으로 오름차순으로 5개까지 출력하세요. 
+
 ```sql 
+SELECT customerId,
+   ...> CASE WHEN FAX NOT NULL THEN 'X'
+   ...> WHEN FAX IS NULL THEN 'O'
+   ...> END as "FAX_유/무"
+   ...> FROM customers
+   ...> ORDER BY CustomerId ASC LIMIT 5;
+-----------------------------------------------------
+CustomerId  FAX_유/무
+----------  -------
+1           X
+2           O
+3           O
+4           O
+5           X
 ```
 
 ### 15. 점원(employees) 테이블에서 `올해년도 - BirthDate 년도 + 1` 를 계산해서 `나이` 컬럼에 표시하여 출력하세요.
 | 단, 점원의 `LastName`, `FirstName`, `나이` 컬럼만 출력하고, `EmployeeId`를 기준으로 오름차순으로 출력하세요.
 
 | cast(), strftime(), 오늘 날짜를 구하는 함수를 검색하고, 활용해보세요.
+
 ```sql 
+SELECT LastName, FirstName, CAST(strftime('%Y', 'now') AS INT) - CAST(strftime('%Y', BirthDate) AS INT) + 1 AS 나이
+   ...> FROM employees
+   ...> ORDER BY EmployeeId ASC;
+-----------------------------------------------------------------------------------------
+LastName  FirstName  나이
+--------  ---------  --
+Adams     Andrew     61
+Edwards   Nancy      65
+Peacock   Jane       50
+Park      Margaret   76
+Johnson   Steve      58
+Mitchell  Michael    50
+King      Robert     53
+Callahan  Laura      55
 ```
 
 ### 16. 가수(artists) 테이블에서 앨범(albums)의 개수가 가장 많은 가수의 `Name`을 출력하세요.
 | artists 테이블과 albums 테이블의 `ArtistId` 활용하세요.
+
 ```sql 
+SELECT Name
+   ...> FROM artists
+   ...> WHERE ArtistId = (SELECT ArtistId
+   ...> FROM albums
+   ...> GROUP BY artistId
+   ...> ORDER BY Count(*) DESC LIMIT 1);
+-----------------------------------------------------------
+Name
+-----------
+Iron Maiden
 ```
 
 ### 17. 장르(genres) 테이블에서 음악(tracks)의 개수가 가장 적은 장르의 `Name`을 출력하세요.
 | genres 테이블과 tracks 테이블의 `GenreId` 활용하세요.
+
 ```sql 
+SELECT Name
+   ...> FROM genres
+   ...> WHERE GenreId = (SELECT GenreId
+   ...> FROM tracks
+   ...> GROUP BY GenreId
+   ...> ORDER BY Count(*) ASC LIMIT 1);
+-------------------------------------------------------
+Name
+-----
+Opera
 ```
 
 
